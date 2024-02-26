@@ -1,15 +1,23 @@
-import styles from './CityList.module.css'
+import CityItem from "./CityItem";
+import styles from "./CityList.module.css";
+import Spinner from "./Spinner";
+import PropTypes from 'prop-types';
 
-function CityList() {
-  return (
-    <ul className={styles.CityList}>
-      
-    </ul>
-  )
+function CityList({ cities, isLoading }) {
+  if(isLoading) return <Spinner />;
+
+
+  return <ul className={styles.CityList}>
+    {cities.map(city => (<CityItem city={city} key={city.id}/>))}
+  </ul>;
 }
 
-export default CityList
+CityList.propTypes = {
+  cities : PropTypes.array,
+  isLoading : PropTypes.bool
+}
 
+export default CityList;
 
 // How to fetch a fake API?
 // -> Install json-server (npm i json-server)
